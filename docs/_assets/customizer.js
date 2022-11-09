@@ -17,23 +17,24 @@
 /*global MaterialCustomizer:true,Prism:true,ga:true*/
 
 /* exported init */
-function init() {
+function init() 
+{
   'use strict';
-
   var wheel = document.querySelector('#wheel > svg');
   var cdn = document.querySelector('.mdl-gen__cdn .mdl-gen__cdn-link');
   var mc = new MaterialCustomizer(wheel, cdn);
-
   // Workaround for IE.
   var dl = document.querySelector('#download');
-  dl.addEventListener('click', function() {
-    if (window.navigator.msSaveBlob) {
+  dl.addEventListener('click', function() 
+  {
+    if (window.navigator.msSaveBlob) 
+    {
       window.navigator.msSaveBlob(this.blob, 'material.min.css');
     }
   }.bind(mc));
-
   // Hook up GA event
-  dl.addEventListener('click', function() {
+  dl.addEventListener('click', function() 
+  {
     ga('send', {
       hitType: 'event',
       eventCategory: 'customizer',
@@ -41,36 +42,39 @@ function init() {
       eventLabel: mc.getSelectedPrimary() + '-' + mc.getSelectedSecondary()
     });
   });
-
   var clickCtr = 0;
-  cdn.addEventListener('click', function() {
+  cdn.addEventListener('click', function() 
+  {
     var selection = window.getSelection();
     selection.removeAllRanges();
-
     var range = document.createRange();
-    if (clickCtr === 0) {
+    if (clickCtr === 0) 
+    {
       var link = cdn.querySelectorAll('.token.attr-value')[1];
       range.setStart(link, 2);
       range.setEnd(link, 3);
-    } else {
+    } 
+    else 
+    {
       range.setStart(cdn, 1);
       range.setEnd(cdn, 2);
     }
-
     selection.addRange(range);
     clickCtr = (clickCtr + 1) % 2;
   });
-
   // Prevent browser's selection handling
-  cdn.addEventListener('mouseup', function(ev) {
+  cdn.addEventListener('mouseup', function(ev) 
+  {
     ev.preventDefault();
   });
-  cdn.addEventListener('mousedown', function(ev) {
+  cdn.addEventListener('mousedown', function(ev) 
+  {
     ev.preventDefault();
   });
-
-  document.addEventListener('mouseup', function() {
-    if (window.getSelection().toString().indexOf('.min.css') !== -1) {
+  document.addEventListener('mouseup', function() 
+  {
+    if (window.getSelection().toString().indexOf('.min.css') !== -1) 
+    {
       ga('send', {
         hitType: 'event',
         eventCategory: 'customizer',
@@ -79,14 +83,15 @@ function init() {
       });
     }
   });
-
   // Download template
   var req = new XMLHttpRequest();
-  req.onload = function() {
+  req.onload = function() 
+  {
     mc.template = this.responseText;
     mc.highlightField('Indigo');
     mc.highlightField('Pink');
-    window.requestAnimationFrame(function() {
+    window.requestAnimationFrame(function() 
+    {
       mc.updateCDN();
       mc.updateStylesheet();
     });
@@ -94,8 +99,8 @@ function init() {
   req.open('get', '../material.min.css.template', true);
   req.send();
 }
-
-MaterialCustomizer = (function() {
+MaterialCustomizer = (function() 
+{
   'use strict';
 
   var COLORS = ['Cyan', 'Teal', 'Green', 'Light Green', 'Lime',
@@ -167,11 +172,12 @@ MaterialCustomizer = (function() {
    '96,125,139', '84,110,122', '69,90,100', '55,71,79', '38,50,56']
   ];
 
-  function parentWrapper(p) {
+  function parentWrapper(p) 
+  {
     return p.parentElement || p.parentNode;
   }
-
-  var MaterialCustomizer = function(wheel, cdn) {
+  var MaterialCustomizer = function(wheel, cdn) 
+  {
     this.wheel = wheel;
     this.cdn = cdn;
     if (this.cdn) {
@@ -183,8 +189,8 @@ MaterialCustomizer = (function() {
 
     this.init_();
   };
-
-  MaterialCustomizer.prototype.init_ = function() {
+  MaterialCustomizer.prototype.init_ = function() 
+  {
     this.config = {
       width: 650, // width of the SVG panel
       height: 650, // height of the SVG panel
@@ -199,14 +205,14 @@ MaterialCustomizer = (function() {
     this.forbiddenAccents = FORBIDDEN_ACCENTS;
     this.calculateValues_();
 
-    if (this.wheel) {
+    if (this.wheel) 
+    {
       this.buildWheel_();
     }
-
     return;
   };
-
-  MaterialCustomizer.prototype.calculateValues_ = function() {
+  MaterialCustomizer.prototype.calculateValues_ = function() 
+  {
     var config = this.config;
     // Calculated values
     // Angle of each piece of the wheel
@@ -223,29 +229,26 @@ MaterialCustomizer = (function() {
     // Center of selector circle
     config.cx = (config.c + config.r) * Math.sin(config.alphaRad) / 2;
     config.cy = -(config.c + config.r) * (1 + Math.cos(config.alphaRad)) / 2;
-
     this.config = config;
   };
-
-  MaterialCustomizer.prototype.buildWheel_ = function() {
+  MaterialCustomizer.prototype.buildWheel_ = function() 
+  {
     var config = this.config;
     var mainG = this.wheel.querySelector('g.wheel--maing');
     var wheelContainer = this.wheel.parentNode;
-
     this.wheel.setAttribute('viewBox', '0 0 ' +
       this.config.width + ' ' +  this.config.height);
     this.wheel.setAttribute('preserveAspectRatio', 'xMidYMid meet');
     this.wheel.setAttribute('width', this.config.width);
     this.wheel.setAttribute('height', this.config.height);
-
     var fieldTpl = this.generateFieldTemplate_();
-
     var svgNS = 'http://www.w3.org/2000/svg';
-    config.colors.forEach(function(color, idx) {
+    config.colors.forEach(function(color, idx) 
+    {
       var field = fieldTpl.cloneNode(true);
       var tooltip = document.createElement('div');
-
-      for (var i = 1; i <= 2; i++) {
+      for (var i = 1; i <= 2; i++) 
+      {
         var g = document.createElementNS(svgNS, 'g');
         var label = document.createElementNS(svgNS, 'text');
         label.setAttribute('class', 'label label--' + i);
@@ -268,19 +271,16 @@ MaterialCustomizer = (function() {
         addEventListener('click', this.fieldClicked_.bind(this));
       field.setAttribute('transform', 'rotate(' + config.alphaDeg * idx + ')');
       mainG.appendChild(field);
-
       tooltip.setAttribute('for', color);
       tooltip.className = 'mdl-tooltip mdl-tooltip--large';
       tooltip.innerHTML = color;
       wheelContainer.appendChild(tooltip);
     }.bind(this));
-
     mainG.setAttribute('transform',
       'translate(' + config.width / 2 + ',' + config.height / 2 + ')');
-
   };
-
-  MaterialCustomizer.prototype.generateFieldTemplate_ = function() {
+  MaterialCustomizer.prototype.generateFieldTemplate_ = function() 
+  {
     var svgNS = 'http://www.w3.org/2000/svg';
     var config = this.config;
     var fieldTpl = document.createElementNS(svgNS, 'g');

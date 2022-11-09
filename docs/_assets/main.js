@@ -17,18 +17,19 @@
 /*global MaterialCustomizer:true,Prism:true,ga:true*/
 
 // Navbar scroll buttons
-(function() {
+(function() 
+{
   'use strict';
 
   var rightScroll = document.querySelector('.scrollindicator.scrollindicator--right');
   var leftScroll = document.querySelector('.scrollindicator.scrollindicator--left');
   var menuBar = document.querySelector('.docs-navigation');
   var delta = 40;
-
   function updateScrollIndicator() {
     leftScroll.classList.remove('disabled');
     rightScroll.classList.remove('disabled');
-    if (menuBar.scrollLeft <= 0) {
+    if (menuBar.scrollLeft <= 0) 
+    {
       leftScroll.classList.add('disabled');
     }
     // 5px tolerance because browsers!
@@ -38,23 +39,24 @@
   }
   menuBar.addEventListener('scroll', updateScrollIndicator);
   updateScrollIndicator();
-
-  function scrollMenuBar(delta) {
+  function scrollMenuBar(delta) 
+  {
     menuBar.scrollLeft += delta;
   }
-
   rightScroll.addEventListener('click', scrollMenuBar.bind(null, delta));
   rightScroll.addEventListener('tap', scrollMenuBar.bind(null, delta));
   leftScroll.addEventListener('click', scrollMenuBar.bind(null, -delta));
   leftScroll.addEventListener('tap', scrollMenuBar.bind(null, -delta));
 })();
 
-(function() {
+(function() 
+{
   'use strict';
-
   var downloadButton = document.querySelector('.download-button-container');
-  if (downloadButton) {
-    downloadButton.addEventListener('click', function() {
+  if (downloadButton) 
+  {
+    downloadButton.addEventListener('click', function() 
+    {
       ga('send', {
         hitType: 'event',
         eventCategory: 'click',
@@ -64,13 +66,15 @@
   }
 
 })();
-
 // Disable empty links in demo's to prevent refresh page
-(function () {
+(function () 
+{
   'use strict';
   var emptyLinks = document.querySelectorAll('[href=""]');
-  Array.prototype.forEach.call(emptyLinks, function(link) {
-    link.addEventListener('click', function (event){
+  Array.prototype.forEach.call(emptyLinks, function(link) 
+  {
+    link.addEventListener('click', function (event)
+    {
       event.preventDefault();
     });
   });
