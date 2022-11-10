@@ -8,13 +8,12 @@
  *
  *      http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
+ * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * See the License for the specific language governing permissions and limitations under the License.
  */
-(function() {
+(function() 
+{
   'use strict';
 
   /**
@@ -25,7 +24,8 @@
    * @constructor
    * @param {HTMLElement} element The element that will be upgraded.
    */
-  var MaterialCheckbox = function MaterialCheckbox(element) {
+  var MaterialCheckbox = function MaterialCheckbox(element) 
+  {
     this.element_ = element;
 
     // Initialize instance.
@@ -45,8 +45,7 @@
 
   /**
    * Store strings for class names defined by this component that are used in
-   * JavaScript. This allows us to simply change it in one place should we
-   * decide to modify at a later date.
+   * JavaScript. This allows us to simply change it in one place should we decide to modify at a later date.
    *
    * @enum {string}
    * @private
@@ -138,7 +137,6 @@
   };
 
   // Public methods.
-
   /**
    * Check the inputs toggle state and update display.
    *
@@ -176,7 +174,6 @@
   };
   MaterialCheckbox.prototype['checkDisabled'] =
       MaterialCheckbox.prototype.checkDisabled;
-
   /**
    * Disable checkbox.
    *
@@ -188,7 +185,6 @@
     this.updateClasses_();
   };
   MaterialCheckbox.prototype['disable'] = MaterialCheckbox.prototype.disable;
-
   /**
    * Enable checkbox.
    *
@@ -200,7 +196,6 @@
     this.updateClasses_();
   };
   MaterialCheckbox.prototype['enable'] = MaterialCheckbox.prototype.enable;
-
   /**
    * Check checkbox.
    *
@@ -212,7 +207,6 @@
     this.updateClasses_();
   };
   MaterialCheckbox.prototype['check'] = MaterialCheckbox.prototype.check;
-
   /**
    * Uncheck checkbox.
    *
@@ -224,7 +218,6 @@
     this.updateClasses_();
   };
   MaterialCheckbox.prototype['uncheck'] = MaterialCheckbox.prototype.uncheck;
-
   /**
    * Initialize element.
    */
@@ -243,7 +236,6 @@
       boxOutline.appendChild(tickOutline);
       this.element_.appendChild(tickContainer);
       this.element_.appendChild(boxOutline);
-
       if (this.element_.classList.contains(this.CssClasses_.RIPPLE_EFFECT)) 
       {
         this.element_.classList.add(this.CssClasses_.RIPPLE_IGNORE_EVENTS);

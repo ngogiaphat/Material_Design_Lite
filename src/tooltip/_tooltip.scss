@@ -15,8 +15,8 @@
  */
 
 @import "../variables";
-
-.mdl-tooltip {
+.mdl-tooltip 
+{
   transform: scale(0);
   transform-origin: top center;
   z-index: 999;
@@ -34,30 +34,33 @@
   padding: 8px;
   text-align: center;
 }
-.mdl-tooltip.is-active {
+.mdl-tooltip.is-active 
+{
   animation: pulse 200ms $animation-curve-linear-out-slow-in forwards;
 }
-
-.mdl-tooltip--large {
+.mdl-tooltip--large 
+{
   line-height: 14px;
   font-size: $tooltip-font-size-large;
   padding: 16px;
 }
-
-@keyframes pulse {
-  0% {
+@keyframes pulse 
+{
+  0% 
+  {
     transform: scale(0);
     opacity: 0;
   }
-  50% {
-    // Fixes a weird bug with the interaction between Safari and the result of
-    // the SASS compilation for the animation.
+  50% 
+  {
+    // Fixes a weird bug with the interaction between Safari and the result of the SASS compilation for the animation.
     // Essentially, we need to make sure that "50%" and "100%" don't get merged
     // into a single "50%, 100%" entry, so we need to avoid them having any
     // matching properties.
     transform: scale(0.99);
   }
-  100% {
+  100% 
+  {
     transform: scale(1);
     opacity: 1;
     visibility: visible;

@@ -142,7 +142,6 @@
       {
         this.forElement_ = document.getElementById(forElId);
       }
-
       if (this.forElement_) 
       {
         // It's left here because it prevents accidental text selection on Android
