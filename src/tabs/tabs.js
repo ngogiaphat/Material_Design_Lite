@@ -69,32 +69,31 @@
    *
    * @private
    */
-  MaterialTabs.prototype.initTabs_ = function() {
-    if (this.element_.classList.contains(this.CssClasses_.MDL_JS_RIPPLE_EFFECT)) {
-      this.element_.classList.add(
-        this.CssClasses_.MDL_JS_RIPPLE_EFFECT_IGNORE_EVENTS);
+  MaterialTabs.prototype.initTabs_ = function() 
+  {
+    if (this.element_.classList.contains(this.CssClasses_.MDL_JS_RIPPLE_EFFECT)) 
+    {
+      this.element_.classList.add( this.CssClasses_.MDL_JS_RIPPLE_EFFECT_IGNORE_EVENTS);
     }
-
     // Select element tabs, document panels
     this.tabs_ = this.element_.querySelectorAll('.' + this.CssClasses_.TAB_CLASS);
-    this.panels_ =
-        this.element_.querySelectorAll('.' + this.CssClasses_.PANEL_CLASS);
-
+    this.panels_ = this.element_.querySelectorAll('.' + this.CssClasses_.PANEL_CLASS);
     // Create new tabs for each tab element
-    for (var i = 0; i < this.tabs_.length; i++) {
+    for (var i = 0; i < this.tabs_.length; i++) 
+    {
       new MaterialTab(this.tabs_[i], this);
     }
-
     this.element_.classList.add(this.CssClasses_.UPGRADED_CLASS);
   };
-
   /**
    * Reset tab state, dropping active classes
    *
    * @private
    */
-  MaterialTabs.prototype.resetTabState_ = function() {
-    for (var k = 0; k < this.tabs_.length; k++) {
+  MaterialTabs.prototype.resetTabState_ = function() 
+  {
+    for (var k = 0; k < this.tabs_.length; k++) 
+    {
       this.tabs_[k].classList.remove(this.CssClasses_.ACTIVE_CLASS);
     }
   };
@@ -104,21 +103,24 @@
    *
    * @private
    */
-  MaterialTabs.prototype.resetPanelState_ = function() {
-    for (var j = 0; j < this.panels_.length; j++) {
+  MaterialTabs.prototype.resetPanelState_ = function() 
+  {
+    for (var j = 0; j < this.panels_.length; j++) 
+    {
       this.panels_[j].classList.remove(this.CssClasses_.ACTIVE_CLASS);
     }
   };
-
   /**
    * Set the active tab.
    *
    * @public
    * @param {Element|number} tab The tab element or index to set active.
    */
-  MaterialTabs.prototype.setTab = function(tab) {
+  MaterialTabs.prototype.setTab = function(tab) 
+  {
     tab = (typeof tab === 'number') ? this.tabs_[tab] : tab;
-    if (tab && tab.getAttribute('href').charAt(0) === '#') {
+    if (tab && tab.getAttribute('href').charAt(0) === '#') 
+    {
       var href = tab.href.split('#')[1];
       var panel = this.element_.querySelector('#' + href);
       this.resetTabState_();
@@ -127,12 +129,13 @@
       panel.classList.add(this.CssClasses_.ACTIVE_CLASS);
     }
   };
-
   /**
    * Initialize element.
    */
-  MaterialTabs.prototype.init = function() {
-    if (this.element_) {
+  MaterialTabs.prototype.init = function() 
+  {
+    if (this.element_) 
+    {
       this.initTabs_();
     }
   };
@@ -144,9 +147,12 @@
    * @param {Element} tab The HTML element for the tab.
    * @param {MaterialTabs} ctx The MaterialTabs object that owns the tab.
    */
-  function MaterialTab(tab, ctx) {
-    if (tab) {
-      if (ctx.element_.classList.contains(ctx.CssClasses_.MDL_JS_RIPPLE_EFFECT)) {
+  function MaterialTab(tab, ctx) 
+  {
+    if (tab) 
+    {
+      if (ctx.element_.classList.contains(ctx.CssClasses_.MDL_JS_RIPPLE_EFFECT)) 
+      {
         var rippleContainer = document.createElement('span');
         rippleContainer.classList.add(ctx.CssClasses_.MDL_RIPPLE_CONTAINER);
         rippleContainer.classList.add(ctx.CssClasses_.MDL_JS_RIPPLE_EFFECT);
@@ -155,19 +161,17 @@
         rippleContainer.appendChild(ripple);
         tab.appendChild(rippleContainer);
       }
-
-      tab.addEventListener('click', function(e) {
-        if (tab.getAttribute('href').charAt(0) === '#') {
+      tab.addEventListener('click', function(e) 
+      {
+        if (tab.getAttribute('href').charAt(0) === '#') 
+        {
           e.preventDefault();
           ctx.setTab(tab);
         }
       });
-
     }
   }
-
-  // The component registers itself. It can assume componentHandler is available
-  // in the global scope.
+  // The component registers itself. It can assume componentHandler is available in the global scope.
   componentHandler.register({
     constructor: MaterialTabs,
     classAsString: 'MaterialTabs',
